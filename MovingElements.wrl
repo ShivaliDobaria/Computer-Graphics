@@ -1,0 +1,323 @@
+#VRML V2.0 utf8
+
+WorldInfo
+  {
+  title "checkerBoard.wrl"
+  }
+  
+PROTO check
+  [
+  field MFColor checkColor [1 1 0, 1 1 0]
+  ]
+  {
+ DEF CheckerBoard Shape
+    {
+    appearance Appearance
+      {
+      material NULL
+      texture NULL
+      textureTransform NULL
+      }
+    geometry IndexedFaceSet
+      {
+      coord Coordinate
+        {
+        point [-0.5 0.0 -0.5, 0.5 0.0 -0.5, 0.5 0.0 0.5, -0.5 0.0 0.5]
+        }
+      coordIndex [0, 1, 2, -1, 0, 2, 3, -1]
+      texCoord NULL
+      texCoordIndex []
+      color Color
+        {
+        color IS checkColor
+        }
+      colorIndex []
+      colorPerVertex FALSE
+      normal NULL
+      normalIndex []
+      normalPerVertex FALSE
+      ccw FALSE # FALSE == counter clockwise!?
+      solid FALSE # TRUE == back face culling!?
+      convex TRUE
+      creaseAngle 0
+      }
+    }
+  }
+
+
+PROTO checkChunk2x2
+  [] # No fields or events
+  {
+  Group
+    {
+    bboxCenter 0 0 0
+    bboxSize 2 2 2
+    children
+      [
+      Transform
+        {
+        bboxCenter 0 0 0
+        bboxSize 1 1 1
+        translation -0.5 0 -0.5
+        rotation 0 1 0 0
+        scale 1 1 1
+        scaleOrientation 0 0 1 0
+        center 0 0 0
+        children check { checkColor [1 1 1, 1 1 1] }
+        }
+      Transform
+        {
+        bboxCenter 0 0 0
+        bboxSize 1 1 1
+        translation 0.5 0 -0.5
+        rotation 0 1 0 0
+        scale 1 1 1
+        scaleOrientation 0 0 1 0
+        center 0 0 0
+        children check { checkColor [1 0 0, 1 0 0] }
+        }
+      Transform
+        {
+        bboxCenter 0 0 0
+        bboxSize 1 1 1
+        translation -0.5 0 0.5
+        rotation 0 1 0 0
+        scale 1 1 1
+        scaleOrientation 0 0 1 0
+        center 0 0 0
+        children check { checkColor [1 0 0, 1 0 0] }
+        }
+      Transform
+        {
+        bboxCenter 0 0 0
+        bboxSize 1 1 1
+        translation 0.5 0 0.5
+        rotation 0 1 0 0
+        scale 1 1 1
+        scaleOrientation 0 0 1 0
+        center 0 0 0
+        children check { checkColor [1 1 1, 1 1 1] }
+        }
+      ]
+    }
+  }
+
+PROTO checkChunk4x4
+  [] # No fields or events
+  {
+  Group
+    {
+    bboxCenter 0 0 0
+    bboxSize 4 4 4
+    children
+      [
+      Transform
+        {
+        bboxCenter 0 0 0
+        bboxSize 2 2 2
+        translation -1 0 -1
+        rotation 0 1 0 0
+        scale 1 1 1
+        scaleOrientation 0 0 1 0
+        center 0 0 0
+        children checkChunk2x2 {}
+        }
+      Transform
+        {
+        bboxCenter 0 0 0
+        bboxSize 2 2 2
+        translation 1 0 -1
+        rotation 0 1 0 0
+        scale 1 1 1
+        scaleOrientation 0 0 1 0
+        center 0 0 0
+        children checkChunk2x2 {}
+        }
+      Transform
+        {
+        bboxCenter 0 0 0
+        bboxSize 2 2 2
+        translation -1 0 1
+        rotation 0 1 0 0
+        scale 1 1 1
+        scaleOrientation 0 0 1 0
+        center 0 0 0
+        children checkChunk2x2 {}
+        }
+      Transform
+        {
+        bboxCenter 0 0 0
+        bboxSize 2 2 2
+        translation 1 0 1
+        rotation 0 1 0 0
+        scale 1 1 1
+        scaleOrientation 0 0 1 0
+        center 0 0 0
+        children checkChunk2x2 {}
+        }
+      ]
+    }
+  }
+
+PROTO checkChunk8x8
+  [] # No fields or events
+  {
+  Group
+    {
+    bboxCenter 0 0 0
+    bboxSize 8 8 8
+    children
+      [
+      Transform
+        {
+        bboxCenter 0 0 0
+        bboxSize 4 4 4
+        translation -2 0 -2
+        rotation 0 1 0 0
+        scale 1 1 1
+        scaleOrientation 0 0 1 0
+        center 0 0 0
+        children checkChunk4x4 {}
+        }
+      Transform
+        {
+        bboxCenter 0 0 0
+        bboxSize 4 4 4
+        translation 2 0 -2
+        rotation 0 1 0 0
+        scale 1 1 1
+        scaleOrientation 0 0 1 0
+        center 0 0 0
+        children checkChunk4x4 {}
+        }
+      Transform
+        {
+        bboxCenter 0 0 0
+        bboxSize 4 4 4
+        translation -2 0 2
+        rotation 0 1 0 0
+        scale 1 1 1
+        scaleOrientation 0 0 1 0
+        center 0 0 0
+        children checkChunk4x4 {}
+        }
+      Transform
+        {
+        bboxCenter 0 0 0
+        bboxSize 4 4 4
+        translation 2 0 2
+        rotation 0 1 0 0
+        scale 1 1 1
+        scaleOrientation 0 0 1 0
+        center 0 0 0
+        children checkChunk4x4 {}
+        }
+      ]
+    }
+  }
+
+
+Group
+  {
+  children checkChunk8x8 {}
+  }
+
+
+Group {
+    children [
+    # Rotating Cube
+        DEF Cone0 Transform {
+	translation -3.5 0.5 -0.5
+            children Shape {
+                appearance Appearance {
+                    material Material { diffuseColor 1 0 0 }
+                }
+                 geometry DEF ICKLECONE Cone {
+            bottomRadius 0.3
+            height 1
+            bottom FALSE
+         }
+            }
+        },
+    # Sensor
+        DEF Touch TouchSensor { },
+    # Animation clock
+        DEF Clock TimeSensor { cycleInterval 2 },
+    # Animation path
+        DEF MovePath0 PositionInterpolator {
+         key [ 0 1 ]
+	 keyValue [ -3.5 0.5 -0.5, -0.5 0.5 -0.5]
+
+        }
+    ]
+}
+
+
+
+ROUTE Touch.touchTime        TO Clock.set_startTime
+ROUTE Clock.fraction_changed TO MovePath0.set_fraction
+ROUTE MovePath0.value_changed TO Cone0.set_translation
+
+Group {
+    children [
+    # Rotating Cube
+        DEF Cone Transform {
+	translation -3.5 0.5 -2.5
+            children Shape {
+                appearance Appearance {
+                    material Material { diffuseColor 1 0 0 }
+                }
+                geometry USE ICKLECONE
+            }
+        },
+    # Sensor
+        DEF Touch TouchSensor { },
+    # Animation clock
+        DEF Clock TimeSensor { cycleInterval 2 },
+    # Animation path
+        DEF MovePath PositionInterpolator {
+         key [ 0 1 ]
+	 keyValue [ -3.5 0.5 -2.5, -2.5 0.5 -2.5, -1.5 0.5 -2.5]
+
+        }
+    ]
+}
+
+
+
+ROUTE Touch.touchTime        TO Clock.set_startTime
+ROUTE Clock.fraction_changed TO MovePath.set_fraction
+ROUTE MovePath.value_changed TO Cone.set_translation
+
+
+Group {
+    children [
+    # Rotating Cube
+        DEF Cone1 Transform {
+	translation -3.5 0.5 -1.5
+            children Shape {
+                appearance Appearance {
+                    material Material { diffuseColor 1 0 0 }
+                }
+                geometry USE ICKLECONE
+            }
+        },
+    # Sensor
+        DEF Touch TouchSensor { },
+    # Animation clock
+        DEF Clock TimeSensor { cycleInterval 2 },
+    # Animation path
+        DEF MovePath1 PositionInterpolator {
+         key [ 0 1 ]
+	 keyValue [ -3.5 0.5 -1.5, -3.5 0.5 -0.5]
+
+        }
+    ]
+}
+
+
+
+ROUTE Touch.touchTime        TO Clock.set_startTime
+ROUTE Clock.fraction_changed TO MovePath1.set_fraction
+ROUTE MovePath1.value_changed TO Cone1.set_translation
+
